@@ -28,7 +28,7 @@ install() {
 
     wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
 
-    esac
+ 
     chmod 777 /root/mp/mp
 
     wget https://github.com/minerproxyvip/mp/blob/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
