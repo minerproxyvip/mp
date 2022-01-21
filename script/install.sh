@@ -92,44 +92,11 @@ check_limit(){
 }
 
 echo "======================================================="
-echo "Char1esOrz的minerProxy 一键工具"
-echo "  1、安装(默认安装到/root/minerProxy)"
-echo "  2、卸载"
-echo "  3、更新"
-echo "  4、启动"
-echo "  5、重启"
-echo "  6、停止"
-echo "  7、解除linux系统连接数限制(需要重启服务器生效)"
-echo "  8、查看当前系统连接数限制"
-#echo "  9、配置开机启动"
+echo "抽水中转一键安装工具"
+echo "默认安装到/root/mp"
 echo "======================================================="
-read -p "$(echo -e "请选择[1-8]：")" choose
-case $choose in
-1)
-    install
-    ;;
-2)
-    uninstall
-    ;;
-3)
-    install
-    ;;
-4)
-    start
-    ;;
-5)
-    restart
-    ;;
-6)
-    stop
-    ;;
-7)
-    change_limit
-    ;;
-8)
-    check_limit
-    ;;
-*)
-    echo "输入错误请重新输入！"
-    ;;
+install
+
 esac
+
+
