@@ -62,10 +62,9 @@ install() {
     echo "1，请进后台打开防火墙端口"
     sleep 2s
     echo "2，有的服务器需要检查ufw情况"    
-    sleep 5s
-    cat /root/mp/config.yml
-    echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
+    sleep 5s    
 }
+
 
 uninstall() {
     read -p "是否确认删除mp[yes/no]：" flag
@@ -82,6 +81,16 @@ uninstall() {
     fi
 }
 
+
+check_done() {
+    if netstat -antpl | grep -q "mp"; then
+        echo -e "安装成功，抽水软件在运行中。" 
+        cat /root/mp/config.yml
+        echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
+        exit 1
+    fi  
+    echo "安装不成功，请重启后重新安装"   
+}
 
 
 start() {
@@ -127,6 +136,7 @@ echo "======================================================="
 check_limit
 change_limit
 install
+check_done
 
  
 
