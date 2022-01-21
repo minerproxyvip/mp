@@ -37,14 +37,16 @@ install() {
 
     systemctl restart supervisor
 
-    echo "如果没有报错则安装成功， 如果安装不成功，可以多安装几次。"
-    sleep 1s
+    echo "如果没有报错则安装成功"
+    sleep 2s
+    echo "如果安装不成功，可以多安装几次"
+    sleep 2s
     echo "正在启动抽水中转软件..."
-    sleep 1s
+    sleep 2s
     echo "1，请进后台打开防火墙端口"
-    sleep 1s
+    sleep 2s
     echo "2，有的服务器需要检查ufw情况"    
-    sleep 10s
+    sleep 5s
     cat /root/mp/config.yml
     echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
 }
@@ -63,6 +65,7 @@ uninstall() {
         fi
     fi
 }
+
 
 
 start() {
@@ -105,6 +108,8 @@ echo "======================================================="
 echo "抽水中转一键安装工具"
 echo "默认安装到/root/mp"
 echo "======================================================="
+check_limit
+change_limit
 install
 
  
