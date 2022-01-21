@@ -39,7 +39,8 @@ install() {
  
     chmod 777 /root/mp/mp
 
-    wget https://github.com/minerproxyvip/mp/blob/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
+    rm /etc/supervisor/conf.d/mp.conf
+    wget https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
 
     systemctl restart supervisor
 
