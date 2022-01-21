@@ -12,6 +12,9 @@ fi
 
 install() {
 
+    rm  /var/lib/dpkg/lock
+    $cmd  clean
+    rm /var/lib/dpkg/updates/*
     $cmd update -y
     $cmd install curl wget screen supervisor  systemctl  net-tools -y
 
