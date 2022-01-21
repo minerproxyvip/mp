@@ -46,8 +46,8 @@ install() {
 
     echo "如果没有报错则安装成功"
     echo "正在启动抽水中转软件..."
-
-    sleep 1s
+    
+    sleep 10s
     cat /root/mp/config.yml
     echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
 }
