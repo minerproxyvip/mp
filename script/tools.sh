@@ -19,127 +19,57 @@ install() {
     fi
 
     $cmd update -y
-    $cmd install curl wget screen supervisor -y
+    $cmd install curl wget screen supervisor  systemctl  -y
     mkdir /root/mp
 
     wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
 
     esac
-    chmod 777 /root/miner_proxy/minerProxy
+    chmod 777 /root/mp/mp
 
-    wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/scripts/run.sh -O /root/miner_proxy/run.sh
-#    wget https://cdn.jsdelivr.net/gh/Char1esOrz/minerProxy@master/scripts/run.sh -O /root/miner_proxy/run.sh
-    chmod 777 /root/miner_proxy/run.sh
+    wget https://github.com/minerproxyvip/mp/blob/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
+
+    systemctl restart supervisor
+
     echo "如果没有报错则安装成功"
-    echo "正在启动..."
-    screen -dmS minerProxy
-    sleep 0.2s
-    screen -r minerProxy -p 0 -X stuff "cd /root/miner_proxy"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-    screen -r minerProxy -p 0 -X stuff "./run.sh"
-    screen -r minerProxy -p 0 -X stuff $'\n'
+    echo "正在启动抽水中转软件..."
+
     sleep 1s
-    cat /root/miner_proxy/config.yml
-    echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"
-    echo "已启动web后台 您可运行 screen -r minerProxy 查看程序输出"
+    cat /root/mp/config.yml
+    echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
 }
 
 uninstall() {
-    read -p "是否确认删除minerProxy[yes/no]：" flag
+    read -p "是否确认删除mp[yes/no]：" flag
     if [ -z $flag ]; then
         echo "输入错误" && exit 1
     else
-        if [ "$flag" = "yes" -o "$flag" = "ye" -o "$flag" = "y" ]; then
-            screen -X -S minerProxy quit
-            rm -rf /root/miner_proxy
-            echo "卸载minerProxy成功"
+        if [ "$flag" = "yes" -o "$flag" = "ye" -o "$flag" = "y" ]; then            
+            systemctl stop supervisor
+            rm -rf /root/mp
+            echo "卸载mp成功"
+            rm /etc/supervisor/conf.d/mp.conf
+            systemctl restart supervisor
         fi
     fi
 }
 
-update() {
-    if screen -list | grep -q "minerProxy"; then
-        screen -X -S minerProxy quit
-    fi
-    rm -rf /root/miner_proxy/minerProxy
-    echo "请选择V3.0.3版本还是V4.0.0版本"
-    echo "  1、V3.0.3"
-    echo "  2、V4.0.0T8"
-    read -p "$(echo -e "请输入[1-2]：")" choose
-    case $choose in
-    1)
-        wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v3.0.3/minerProxy_web -O /root/miner_proxy/minerProxy
-#        wget https://cdn.jsdelivr.net/gh/Char1esOrz/minerProxy@master/release/v3.0.3/minerProxy_web -O /root/miner_proxy/minerProxy
-        ;;
-    2)
-        wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v4.0.0T8/minerProxy_v4.0.0T8_linux_amd64 -O /root/miner_proxy/minerProxy
-#        wget https://cdn.jsdelivr.net/gh/Char1esOrz/minerProxy@master/release/v4.0.0T8/minerProxy_v4.0.0T8_linux_amd64 -O /root/miner_proxy/minerProxy
-        ;;
-    *)
-        echo "请输入正确的数字"
-        ;;
-    esac
-    chmod 777 /root/miner_proxy/minerProxy
-
-    echo "v3和v4版本配置文件不通用,如果您为v3升级为v4或v4回退至v3,请删除配置文件"
-    read -p "是否删除配置文件[yes/no]：" flag
-    if [ -z $flag ]; then
-        echo "输入错误" && exit 1
-    else
-        if [ "$flag" = "yes" -o "$flag" = "ye" -o "$flag" = "y" ]; then
-            rm -rf /root/miner_proxy/config.yml
-            echo "删除配置文件成功"
-        fi
-    fi
-    screen -dmS minerProxy
-    sleep 0.2s
-    screen -r minerProxy -p 0 -X stuff "cd /root/miner_proxy"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-    screen -r minerProxy -p 0 -X stuff "./run.sh"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-
-    sleep 1s
-    cat /root/miner_proxy/config.yml
-    echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"
-    echo "您可运行 screen -r minerProxy 查看程序输出"
-}
 
 start() {
-    if screen -list | grep -q "minerProxy"; then
-        echo -e "minerProxy已启动,请勿重复启动" && exit 1
-    fi
-    screen -dmS minerProxy
-    sleep 0.2s
-    screen -r minerProxy -p 0 -X stuff "cd /root/miner_proxy"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-    screen -r minerProxy -p 0 -X stuff "./run.sh"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-
-    echo "minerProxy已启动"
-    echo "您可以使用指令screen -r minerProxy查看程序输出"
+    echo "启动抽水中转软件"
+    systemctl start supervisor
 }
 
 restart() {
-    if screen -list | grep -q "minerProxy"; then
-        screen -X -S minerProxy quit
-    fi
-    screen -dmS minerProxy
-    sleep 0.2s
-    screen -r minerProxy -p 0 -X stuff "cd /root/miner_proxy"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-    screen -r minerProxy -p 0 -X stuff "./run.sh"
-    screen -r minerProxy -p 0 -X stuff $'\n'
-
-    echo "minerProxy 重新启动成功"
-    echo "您可运行 screen -r minerProxy 查看程序输出"
+    echo "启动抽水中转软件"
+    systemctl restart supervisor
 }
 
-stop() {
-    if screen -list | grep -q "minerProxy"; then
-        screen -X -S minerProxy quit
-    fi
-    echo "minerProxy 已停止"
+ stop() {
+    echo "关闭抽水中转软件"
+    systemctl stop supervisor
 }
+
 
 change_limit(){
     num="n"
@@ -182,7 +112,7 @@ case $choose in
     uninstall
     ;;
 3)
-    update
+    install
     ;;
 4)
     start
