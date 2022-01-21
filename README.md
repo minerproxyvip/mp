@@ -14,6 +14,7 @@ linux
 以root登录，执行以下一行命令。
 
 
-bash <(curl -s -L https://github.com/minerproxyvip/mp/blob/main/script/install.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/minerproxyvip/mp/main/script/install.sh)
+
 
 
