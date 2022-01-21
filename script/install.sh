@@ -23,11 +23,9 @@ install() {
     fi
 
 
-
     mkdir /root/mp
 
     wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
-
  
     chmod 777 /root/mp/mp
 
