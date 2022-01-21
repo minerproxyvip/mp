@@ -44,7 +44,7 @@ install() {
 
     systemctl restart supervisor
 
-    echo "如果没有报错则安装成功"
+    echo "如果没有报错则安装成功， 如果安装不成功，可以多安装几次。"
     echo "正在启动抽水中转软件..."
     echo "1，请进后台打开防火墙端口"
     echo "2，有的服务器需要检查ufw情况"
