@@ -14,12 +14,12 @@ install() {
     if [ -d "/root/mp" ]; then
         echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/mp" && exit 1
     fi
-    if screen -list | grep -q "mp"; then
-        echo -e "检测到您已启动了 mp,请关闭后再安装" && exit 1
+    if netstat -antpl | grep -q "mp"; then
+        echo -e "检测到您已启动了 mp, 请关闭后再安装" && exit 1
     fi
 
     $cmd update -y
-    $cmd install curl wget screen supervisor  systemctl  -y
+    $cmd install curl wget screen supervisor  systemctl  net-tools -y
     mkdir /root/mp
 
     wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
