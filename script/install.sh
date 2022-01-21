@@ -16,14 +16,9 @@ install() {
     $cmd  clean
     rm /var/lib/dpkg/updates/*
     $cmd update -y
-
-    $cmd install curl  -y
-
-    $cmd install wget  -y
-    $cmd install screen  -y
-    $cmd install supervisor  -y
-    $cmd install systemctl  -y
-    $cmd install net-tools -y
+    sleep 5s
+    $cmd install curl  wget    screen   supervisor  systemctl   net-tools-y
+    sleep 5s
 
 
     mkdir /root/mp
