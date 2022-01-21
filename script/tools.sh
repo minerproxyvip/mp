@@ -14,15 +14,15 @@ install() {
     if [ -d "/root/mp" ]; then
         echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/mp" && exit 1
     fi
-    if screen -list | grep -q "minerProxy"; then
-        echo -e "检测到您已启动了minerProxy,请关闭后再安装" && exit 1
+    if screen -list | grep -q "mp"; then
+        echo -e "检测到您已启动了 mp,请关闭后再安装" && exit 1
     fi
 
     $cmd update -y
     $cmd install curl wget screen supervisor -y
     mkdir /root/mp
 
-    wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v3.0.3/minerProxy_web -O /root/mp/mp
+    wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
 
     esac
     chmod 777 /root/miner_proxy/minerProxy
