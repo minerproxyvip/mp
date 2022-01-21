@@ -16,7 +16,7 @@ install() {
     $cmd  clean
     rm /var/lib/dpkg/updates/*
     $cmd update -y
-    sleep 5s
+    sleep 10s
     $cmd install curl  wget    screen   supervisor  systemctl   net-tools-y
     sleep 5s
 
