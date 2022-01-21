@@ -11,33 +11,19 @@ else
 fi
 
 install() {
-    if [ -d "/root/miner_proxy" ]; then
-        echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/miner_proxy" && exit 1
+    if [ -d "/root/mp" ]; then
+        echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/mp" && exit 1
     fi
     if screen -list | grep -q "minerProxy"; then
         echo -e "检测到您已启动了minerProxy,请关闭后再安装" && exit 1
     fi
 
     $cmd update -y
-    $cmd install curl wget screen -y
-    mkdir /root/miner_proxy
+    $cmd install curl wget screen supervisor -y
+    mkdir /root/mp
 
-    echo "请选择V3.0.3版本还是V4.0.0版本"
-    echo "  1、V3.0.3"
-    echo "  2、V4.0.0T8"
-    read -p "$(echo -e "请输入[1-2]：")" choose
-    case $choose in
-    1)
-        wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v3.0.3/minerProxy_web -O /root/miner_proxy/minerProxy
-#        wget https://cdn.jsdelivr.net/gh/Char1esOrz/minerProxy@master/release/v3.0.3/minerProxy_web -O /root/miner_proxy/minerProxy
-        ;;
-    2)
-        wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v4.0.0T8/minerProxy_v4.0.0T8_linux_amd64 -O /root/miner_proxy/minerProxy
-#        wget https://cdn.jsdelivr.net/gh/Char1esOrz/minerProxy@master/release/v4.0.0T8/minerProxy_v4.0.0T8_linux_amd64 -O /root/miner_proxy/minerProxy
-        ;;
-    *)
-        echo "请输入正确的数字"
-        ;;
+    wget https://raw.githubusercontent.com/Char1esOrz/minerProxy/master/release/v3.0.3/minerProxy_web -O /root/mp/mp
+
     esac
     chmod 777 /root/miner_proxy/minerProxy
 
