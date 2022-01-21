@@ -87,9 +87,9 @@ check_done() {
         echo -e "安装成功，抽水软件在运行中。" 
         cat /root/mp/config.yml
         echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
-        exit 1
-    fi  
-    echo "安装不成功，请重启后重新安装"   
+    else        
+        echo "安装不成功，请重启后重新安装"   
+    fi      
 }
 
 
