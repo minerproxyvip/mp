@@ -16,7 +16,14 @@ install() {
     $cmd  clean
     rm /var/lib/dpkg/updates/*
     $cmd update -y
-    $cmd install curl wget screen supervisor  systemctl  net-tools -y
+
+    $cmd install curl  -y
+
+    $cmd install wget  -y
+    $cmd install screen  -y
+    $cmd install supervisor  -y
+    $cmd install systemctl  -y
+    $cmd install net-tools -y
 
     if [ -d "/root/mp" ]; then
         echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/mp" && exit 1
