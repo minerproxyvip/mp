@@ -16,6 +16,7 @@ install() {
     $cmd  clean
     rm /var/lib/dpkg/updates/*
     $cmd update -y
+    $cmd install   net-tools   -y    
     sleep 2s
     $cmd install curl    -y
     sleep 2s
@@ -37,8 +38,7 @@ install() {
     sleep 2s
     $cmd update -y
     sleep 2s
-    $cmd install   net-tools   -y
-    sleep 2s
+
 
 
 
