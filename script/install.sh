@@ -25,13 +25,6 @@ install() {
     $cmd install systemctl  -y
     $cmd install net-tools -y
 
-    if [ -d "/root/mp" ]; then
-        echo -e "您已安装了该软件,如果确定没有安装,请输入rm -rf /root/mp" && exit 1
-    fi
-    if netstat -antpl | grep -q "mp"; then
-        echo -e "检测到您已启动了 mp, 请关闭后再安装" && exit 1
-    fi
-
 
     mkdir /root/mp
 
@@ -45,10 +38,12 @@ install() {
     systemctl restart supervisor
 
     echo "如果没有报错则安装成功， 如果安装不成功，可以多安装几次。"
+    sleep 1s
     echo "正在启动抽水中转软件..."
+    sleep 1s
     echo "1，请进后台打开防火墙端口"
-    echo "2，有的服务器需要检查ufw情况"
-    
+    sleep 1s
+    echo "2，有的服务器需要检查ufw情况"    
     sleep 10s
     cat /root/mp/config.yml
     echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
