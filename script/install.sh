@@ -41,7 +41,7 @@ install() {
     sleep 2s
     echo "如果安装不成功，可以多安装几次"
     sleep 2s
-    echo "正在启动抽水中转软件..."
+    echo "正在启动抽水中转软件...请稍等"
     sleep 2s
     echo "1，请进后台打开防火墙端口"
     sleep 2s
