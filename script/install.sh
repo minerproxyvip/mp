@@ -17,8 +17,12 @@ install() {
     rm /var/lib/dpkg/updates/*
     $cmd update -y
 
-    $cmd install   net-tools  curl wget  screen supervisor systemctl  -y    
+    $cmd install net-tools curl wget screen supervisor systemctl -y    
+
+
+
     sleep 2s
+
 
     mkdir /root/mp
 
