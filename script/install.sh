@@ -62,7 +62,8 @@ uninstall() {
 
 check_done() {
     if netstat -antpl | grep -q "mp"; then
-        echo -e "安装成功，抽水软件在运行中。" 
+        echo -e "\n" 
+        echo -e "安装成功，抽水软件已经在运行......" 
         cat /root/mp/config.yml
         echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
     else        
@@ -111,6 +112,7 @@ check_limit(){
 echo "======================================================="
 echo "抽水中转一键安装工具"
 echo "默认安装到/root/mp"
+echo "如果安装不成功，则重启服务器后重新安装"
 echo "出现各种选择，请按 确认/OK"
 echo "======================================================="
 check_limit
