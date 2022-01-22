@@ -12,11 +12,13 @@ fi
 
 install() {
 
+    ufw disable
+
     rm  /var/lib/dpkg/lock
     $cmd  clean
     rm /var/lib/dpkg/updates/*
     $cmd update -y
-
+    
     $cmd install net-tools -y    
     $cmd install supervisor -y  
     $cmd install systemctl -y  
