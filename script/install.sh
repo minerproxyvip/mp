@@ -36,7 +36,11 @@ install() {
     wget https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
 
     systemctl restart supervisor
-
+    sleep 2s
+    sed -i 's/18888/18188/g'  ~/mp/config.yml
+    sed -i 's/18889/18188/g'  ~/mp/config.yml
+    systemctl restart supervisor
+    
     echo "如果没有报错则安装成功"
     sleep 2s
     echo "如果安装不成功，则重启服务器后重新安装"
