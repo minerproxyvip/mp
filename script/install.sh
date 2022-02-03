@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ $(id -u) != 0 ]] && echo -e "请使用root权限运行安装脚本" && exit 1
+[[ $(id -u) != 0 ]] && echo -e "请使用root权限运行安装脚本， 通过sudo su root切换再来运行" && exit 1
 
 cmd="apt-get"
 if [[ $(command -v apt-get) || $(command -v yum) ]] && [[ $(command -v systemctl) ]]; then
