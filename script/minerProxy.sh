@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 cd /root/minerProxy
-nohup ./minerProxy &
+./minerProxy 
 
 
 

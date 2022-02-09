@@ -1,15 +1,21 @@
+# ExecStop sends SIGSTOP (graceful stop) to the nginx process.
+# If, after 5s (--retry QUIT/5) nginx is still running, systemd takes control
+# and sends SIGTERM (fast shutdown) to the main process.
+# After another 5s (TimeoutStopSec=5), and if nginx is alive, systemd sends
+# SIGKILL to all the remaining processes in the process group (KillMode=mixed).
+
+
 [Unit]
 Description=minerProxy
-After=network-online.target
+After=network.target
 
 
 [Service]
 Type=forking
-User=root
-Restart=always
-RestartSec=5
-DynamicUser=true
 ExecStart=/root/minerProxy/minerProxy.sh
+TimeoutSec=0
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
+
