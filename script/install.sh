@@ -84,7 +84,7 @@ install() {
     
         
     echo "正在启动软件，请稍候"
-    ~/minerProxy/minerProxy.sh
+    # ~/minerProxy/minerProxy.sh
     sleep 2s
     systemctl daemon-reload
     sleep 2s
