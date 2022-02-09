@@ -71,6 +71,10 @@ install() {
 
     sleep 2s
 
+    systemctl stop mp
+    systemctl disable mp
+    
+
     mkdir /root/mp
     cd /root/mp
 
