@@ -87,8 +87,10 @@ install() {
     sleep 2s
     systemctl daemon-reload
     sleep 2s
-    systemctl enable mp && systemctl start mp
+    systemctl enable mp 
     sleep 2s
+    systemctl start mp
+    sleep 5s
     sed -i 's/18888/18188/g'  ~/mp/config.yml
     sed -i 's/18889/18188/g'  ~/mp/config.yml
     systemctl restart mp
