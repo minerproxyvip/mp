@@ -78,9 +78,13 @@ install() {
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.service  && chmod -R 777 mp.service && mv mp.service /usr/lib/systemd/system
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.sh  && chmod -R 777 mp.sh
     
-    systemctl reload-daemon 
+        
+    echo "正在启动软件，请稍候"
+    sleep 2s
+    systemctl daemon-reload
+    sleep 2s
     systemctl enable mp && systemctl restart mp
-    sleep 1s
+    sleep 2s
     sed -i 's/18888/18188/g'  ~/mp/config.yml
     sed -i 's/18889/18188/g'  ~/mp/config.yml
     systemctl restart mp
