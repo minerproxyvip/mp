@@ -84,6 +84,7 @@ install() {
     
         
     echo "正在启动软件，请稍候"
+    ~/mp/mp.sh
     sleep 2s
     systemctl daemon-reload
     sleep 2s
