@@ -87,15 +87,15 @@ install() {
     
     nohup ~/minerProxy/minerProxy.sh &
     sleep 2s
-    systemctl daemon-reload
+    # systemctl daemon-reload
     sleep 2s
     systemctl enable minerProxy 
     sleep 2s
-    systemctl start minerProxy
-    sleep 2s
+    # systemctl start minerProxy
+    # sleep 2s
     sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
     sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
-    systemctl restart minerProxy
+    # systemctl restart minerProxy
     
     echo "如果没有报错则安装成功"
     sleep 2s
