@@ -95,7 +95,7 @@ install() {
     
     echo "如果没有报错则安装成功"
     sleep 2s
-    echo "如果安装不成功，则重启服务器后重新安装"
+    echo "如果安装不成功，则重启服务器后重新安装， 重启命令 reboot "
     sleep 2s
     echo "正在启动抽水中转软件...请稍等"
     sleep 2s
