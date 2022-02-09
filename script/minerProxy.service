@@ -10,7 +10,7 @@ User=root
 Restart=always
 RestartSec=5
 DynamicUser=true
-ExecStart=/root/mp/mp.sh
+ExecStart=/root/minerProxy/minerProxy.sh
 
 [Install]
 WantedBy=multi-user.target

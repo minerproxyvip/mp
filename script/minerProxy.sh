@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /root/mp
-./mp
+cd /root/minerProxy
+./minerProxy
 
 
