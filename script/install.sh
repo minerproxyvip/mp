@@ -10,6 +10,51 @@ else
     echo "此脚本不支持该系统" && exit 1
 fi
 
+
+
+function check_sys() {
+  if [[ -f /etc/redhat-release ]]; then
+    release="centos"
+  elif cat /etc/issue | grep -q -E -i "debian"; then
+    release="debian"
+  elif cat /etc/issue | grep -q -E -i "ubuntu"; then
+    release="ubuntu"
+  elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
+    release="centos"
+  elif cat /proc/version | grep -q -E -i "debian"; then
+    release="debian"
+  elif cat /proc/version | grep -q -E -i "ubuntu"; then
+    release="ubuntu"
+  elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
+    release="centos"
+  fi
+  bit=$(uname -m)
+  if test "$bit" != "x86_64"; then
+    echo "请输入你的芯片架构，/386/armv5/armv6/armv7/armv8"
+    read bit
+  else
+    bit="amd64"
+  fi
+}
+
+function Installation_dependency() {
+    if [[ ${release} == "centos" ]]; then
+        yum update
+        yum install -y wget      
+    else
+        apt-get update     
+        apt install wget
+    fi
+}
+
+function check_root() {
+  [[ $EUID != 0 ]] && echo -e "${Error} 当前非ROOT账号(或没有ROOT权限)，无法继续操作，请更换ROOT账号或使用 ${Green_background_prefix}sudo su${Font_color_suffix} 命令获取临时ROOT权限（执行后可能会提示输入当前账号的密码）。" && exit 1
+}
+
+
+
+
+
 install() {
 
     ufw disable
@@ -20,26 +65,23 @@ install() {
     $cmd update -y
     
     $cmd install net-tools -y    
-    $cmd install supervisor -y  
+    # $cmd install supervisor -y  
     $cmd install systemctl -y  
     $cmd install curl wget screen -y    
 
     sleep 2s
 
     mkdir /root/mp
+    cd /root/mp
 
-    wget https://github.com/minerproxyvip/mp/releases/download/v1.0/mp -O /root/mp/mp
- 
-    chmod 777 /root/mp/mp
-
-    rm /etc/supervisor/conf.d/mp.conf
-    wget https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.conf -O /etc/supervisor/conf.d/mp.conf
-
-    systemctl restart supervisor
-    sleep 2s
+    wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/mp  && chmod -R 777  mp
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.service  && chmod -R 777 mp.service && mv mp.service /usr/lib/systemd/system
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.sh  && chmod -R 777 mp.sh
+    systemctl enable mp && systemctl restart mp
+    sleep 1s
     sed -i 's/18888/18188/g'  ~/mp/config.yml
     sed -i 's/18889/18188/g'  ~/mp/config.yml
-    systemctl restart supervisor
+    systemctl restart mp
     
     echo "如果没有报错则安装成功"
     sleep 2s
@@ -60,11 +102,10 @@ uninstall() {
         echo "输入错误" && exit 1
     else
         if [ "$flag" = "yes" -o "$flag" = "ye" -o "$flag" = "y" ]; then            
-            systemctl stop supervisor
+            systemctl stop mp
+            systemctl disable mp
             rm -rf /root/mp
-            echo "卸载mp成功"
-            rm /etc/supervisor/conf.d/mp.conf
-            systemctl restart supervisor
+            echo "卸载mp成功"        
         fi
     fi
 }
@@ -72,14 +113,19 @@ uninstall() {
 
 check_done() {
     if netstat -antpl | grep -q "mp"; then
-        echo -e "\n" 
+        echo -e "\n\n\n" 
+        echo -e "-----------------------------------"
         echo -e "安装成功，抽水软件已经在运行......" 
-        echo -e "\n" 
+        echo -e "\n\n\n" 
         cat /root/mp/config.yml
         echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
+        echo -e "-----------------------------------"
+        echo -e "\n\n" 
     else        
+        echo -e "\n\n" 
         echo "安装不成功，请重启后重新安装"   
         echo "出现各种选择，请按 确认/OK"
+        echo -e "\n\n" 
     fi      
 }
 
