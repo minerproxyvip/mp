@@ -77,6 +77,8 @@ install() {
     wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/mp  && chmod -R 777  mp
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.service  && chmod -R 777 mp.service && mv mp.service /usr/lib/systemd/system
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/mp.sh  && chmod -R 777 mp.sh
+    
+    systemctl reload-daemon 
     systemctl enable mp && systemctl restart mp
     sleep 1s
     sed -i 's/18888/18188/g'  ~/mp/config.yml
