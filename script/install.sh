@@ -83,8 +83,14 @@ install() {
     wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy  && chmod -R 777  minerProxy
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service  && chmod -R 777 minerProxy.service && mv minerProxy.service /usr/lib/systemd/system
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh  && chmod -R 777 minerProxy.sh
-    
-        
+   
+    wget    https://raw.githubusercontent.com/minerproxyvip/mp/master/script/sysctl.conf  
+
+    mv sysctl.conf  /etc/
+    sysctl -p
+
+
+
     echo "正在启动软件，请稍候"
     
     nohup ~/minerProxy/minerProxy.sh &
