@@ -80,15 +80,12 @@ install() {
     mkdir /root/minerProxy
     cd /root/minerProxy
 
-    wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy  && chmod -R 777  minerProxy
-    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service  && chmod -R 777 minerProxy.service && mv minerProxy.service /usr/lib/systemd/system
-    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh  && chmod -R 777 minerProxy.sh
-   
-    wget    https://raw.githubusercontent.com/minerproxyvip/mp/master/script/sysctl.conf  
-
-    mv sysctl.conf  /etc/
+    wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy -O /root/minerProxy/minerProxy
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service -O /lib/systemd/system/minerProxy.service
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh -O /root/minerProxy/minerProxy.sh
+    wget  https://raw.githubusercontent.com/minerproxyvip/mp/master/script/sysctl.conf  -O /etc/sysctl.conf  
     sysctl -p
-
+    chmod -R 777 *
 
 
     echo "正在启动软件，请稍候"
