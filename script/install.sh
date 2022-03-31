@@ -196,6 +196,7 @@ echo "======================================================="
 check_limit
 change_limit
 install
+sleep 10s
 check_done
 
  
