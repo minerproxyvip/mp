@@ -69,6 +69,8 @@ install() {
     $cmd install systemctl -y  
     $cmd install curl wget screen -y    
 
+    $cmd install iptables -y  
+
     sleep 2s
 
     systemctl stop minerProxy
