@@ -133,14 +133,14 @@ uninstall() {
 check_done() {
     if netstat -antpl | grep -q "minerProxy"; then
         echo -e "\n\n" 
-        echo -e "-----------------------------------"
+        echo -e "------------------------------------------------------------------------"
          echo -e "\n" 
         echo -e "安装成功，抽水软件已经在运行......" 
         echo -e "\n" 
         cat /root/minerProxy/config.yml
         echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
          echo -e "\n" 
-        echo -e "-----------------------------------"
+        echo -e "-------------------------------------------------------------------------"
         echo -e "\n" 
     else        
         echo -e "\n\n" 
