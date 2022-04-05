@@ -95,7 +95,7 @@ install() {
     sleep 1s
     systemctl start minerProxy
     sleep 10s
-
+   echo "正在启动软件，请稍候"
     sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
     sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
     sed -i 's/18890/18188/g'  ~/minerProxy/config.yml
