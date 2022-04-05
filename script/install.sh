@@ -80,27 +80,28 @@ install() {
     mkdir /root/minerProxy
     cd /root/minerProxy
 
-    wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy -O /root/minerProxy/minerProxy
-    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service -O /lib/systemd/system/minerProxy.service
-    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh -O /root/minerProxy/minerProxy.sh
-    wget  https://raw.githubusercontent.com/minerproxyvip/mp/master/script/sysctl.conf  -O /etc/sysctl.conf  
-    sysctl -p
-    chmod -R 777 *
-
-
+    wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy  && chmod -R 777  minerProxy
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service  && chmod -R 777 minerProxy.service && mv minerProxy.service /usr/lib/systemd/system
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh  && chmod -R 777 minerProxy.sh
+    
+        
     echo "正在启动软件，请稍候"
     
-    nohup ~/minerProxy/minerProxy.sh &
-    sleep 2s
+    # nohup ~/minerProxy/minerProxy.sh &
+    sleep 1s
     systemctl daemon-reload
-    sleep 2s
+    sleep 1s
     systemctl enable minerProxy 
-    sleep 5s
-    # systemctl start minerProxy
-    # sleep 2s
+    sleep 1s
+    systemctl start minerProxy
+    sleep 10s
+
     sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
     sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
-    # systemctl restart minerProxy
+    sed -i 's/18890/18188/g'  ~/minerProxy/config.yml
+    
+    sleep 2s
+    systemctl restart minerProxy
     
     echo "如果没有报错则安装成功"
     sleep 2s
@@ -111,6 +112,8 @@ install() {
     echo "1，请进后台打开防火墙端口"
     sleep 2s
     echo "2，有的服务器需要检查ufw情况"    
+    sleep 5s    
+    echo "3，安装完成记得重启服务器"    
     sleep 5s    
 }
 
@@ -133,14 +136,14 @@ uninstall() {
 check_done() {
     if netstat -antpl | grep -q "minerProxy"; then
         echo -e "\n\n" 
-        echo -e "------------------------------------------------------------------------"
+        echo -e "-----------------------------------"
          echo -e "\n" 
         echo -e "安装成功，抽水软件已经在运行......" 
         echo -e "\n" 
         cat /root/minerProxy/config.yml
         echo "请记录您的token和端口 并打开 http://服务器ip:端口 访问web服务进行配置"    
          echo -e "\n" 
-        echo -e "-------------------------------------------------------------------------"
+        echo -e "-----------------------------------"
         echo -e "\n" 
     else        
         echo -e "\n\n" 
@@ -196,7 +199,6 @@ echo "======================================================="
 check_limit
 change_limit
 install
-sleep 10s
 check_done
 
  
