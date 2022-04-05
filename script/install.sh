@@ -90,11 +90,9 @@ install() {
     echo "正在启动软件，请稍候"
     
     # nohup ~/minerProxy/minerProxy.sh &
-    sleep 1s
+ 
     systemctl daemon-reload
-    sleep 1s
     systemctl enable minerProxy 
-    sleep 1s
     systemctl start minerProxy
     sleep 10s
     echo "正在启动软件，请稍候"
