@@ -81,27 +81,24 @@ install() {
     cd /root/minerProxy
 
     wget --no-check-certificate https://github.com/minerproxyvip/mp/releases/download/v1.0/minerProxy  -O  /root/minerProxy/minerProxy
-    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service    -O  /root/minerProxy/minerProxy.service
+    wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.service -O /lib/systemd/system/minerProxy.service
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh  -O  /root/minerProxy/minerProxy.sh
     
     chmod +x *
-    mv minerProxy.service /usr/lib/systemd/system/
+    # mv minerProxy.service /usr/lib/systemd/system/
 
-    echo "正在启动软件，请稍候"
+    echo "正在启动软件，请稍候..."
     
-    # nohup ~/minerProxy/minerProxy.sh &
- 
-    systemctl daemon-reload
-    systemctl enable minerProxy 
-    systemctl start minerProxy
+    ~/minerProxy/minerProxy.sh &
+    
+    echo "正在启动软件，请稍候..."
     sleep 10s
-    echo "正在启动软件，请稍候"
-    sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
-    sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
-    sed -i 's/18890/18188/g'  ~/minerProxy/config.yml
-    
+    # sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
+    # sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
+    # sed -i 's/18890/18188/g'  ~/minerProxy/config.yml
+
     sleep 2s
-    systemctl restart minerProxy
+    # systemctl restart minerProxy
     
     echo "如果没有报错则安装成功"
     sleep 2s
@@ -114,7 +111,12 @@ install() {
     echo "2，有的服务器需要检查ufw情况"    
     sleep 5s    
     echo "3，安装完成记得重启服务器"    
-    sleep 5s    
+    sleep 1s    
+
+    systemctl daemon-reload
+    systemctl enable minerProxy 
+    # systemctl start minerProxy
+
 }
 
 
