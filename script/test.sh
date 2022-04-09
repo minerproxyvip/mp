@@ -85,15 +85,13 @@ install() {
     wget --no-check-certificate https://raw.githubusercontent.com/minerproxyvip/mp/main/script/minerProxy.sh  -O  /root/minerProxy/minerProxy.sh
     
     chmod +x *
-    mv minerProxy.service /usr/lib/systemd/system/
+    # mv minerProxy.service /usr/lib/systemd/system/
 
-    echo "正在启动软件，请稍候"
+    echo "正在启动软件，请稍候..."
     
     nohup ~/minerProxy/minerProxy.sh &
- 
-
-   
-    echo "正在启动软件，请稍候"
+    
+    echo "正在启动软件，请稍候..."
     sleep 10s
     # sed -i 's/18888/18188/g'  ~/minerProxy/config.yml
     # sed -i 's/18889/18188/g'  ~/minerProxy/config.yml
