@@ -89,7 +89,7 @@ install() {
 
     echo "正在启动软件，请稍候..."
     
-    ~/minerProxy/minerProxy.sh &
+    nohup ~/minerProxy/minerProxy.sh &
     
     echo "正在启动软件，请稍候..."
     sleep 10s
